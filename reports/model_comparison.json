@@ -1,0 +1,153 @@
+{
+  "logistic_regression": {
+    "accuracy": 0.566525,
+    "precision": 0.5553089906529487,
+    "recall": 0.43499789296249475,
+    "f1": 0.4878452222714518,
+    "confusion_matrix": [
+      [
+        14403,
+        6613
+      ],
+      [
+        10726,
+        8258
+      ]
+    ],
+    "roc_auc": 0.5898356334290524,
+    "model": "Logistic Regression",
+    "train_roc_auc": 0.5891399011379502,
+    "test_roc_auc": 0.5898356334290524,
+    "roc_auc_gap": -0.0006957322911022024,
+    "overfit_flag": false
+  },
+  "decision_tree": {
+    "accuracy": 0.518425,
+    "precision": 0.492673704112179,
+    "recall": 0.4941529709228824,
+    "f1": 0.49341222879684415,
+    "confusion_matrix": [
+      [
+        11356,
+        9660
+      ],
+      [
+        9603,
+        9381
+      ]
+    ],
+    "roc_auc": 0.5172515901435881,
+    "model": "Decision Tree",
+    "train_roc_auc": 1.0,
+    "test_roc_auc": 0.5172515901435881,
+    "roc_auc_gap": 0.4827484098564119,
+    "overfit_flag": true,
+    "tree_depth": 56,
+    "node_count": 74119
+  },
+  "random_forest": {
+    "accuracy": 0.57065,
+    "precision": 0.5652958152958153,
+    "recall": 0.41271597134428994,
+    "f1": 0.4771038850322738,
+    "confusion_matrix": [
+      [
+        14991,
+        6025
+      ],
+      [
+        11149,
+        7835
+      ]
+    ],
+    "roc_auc": 0.5939598816289269,
+    "model": "Random Forest",
+    "train_roc_auc": 0.7332307784938684,
+    "test_roc_auc": 0.5939598816289269,
+    "roc_auc_gap": 0.13927089686494154,
+    "overfit_flag": true
+  },
+  "xgboost": {
+    "accuracy": 0.566925,
+    "precision": 0.553549551873106,
+    "recall": 0.4522229245680573,
+    "f1": 0.49778215869886644,
+    "confusion_matrix": [
+      [
+        14092,
+        6924
+      ],
+      [
+        10399,
+        8585
+      ]
+    ],
+    "roc_auc": 0.5892302285971269,
+    "model": "XGBoost",
+    "train_roc_auc": 0.6942538364218983,
+    "test_roc_auc": 0.5892302285971269,
+    "roc_auc_gap": 0.10502360782477138,
+    "overfit_flag": true
+  },
+  "comparison": [
+    {
+      "model": "Random Forest",
+      "accuracy": 0.57065,
+      "precision": 0.5652958152958153,
+      "recall": 0.41271597134428994,
+      "f1": 0.4771038850322738,
+      "roc_auc": 0.5939598816289269,
+      "train_roc_auc": 0.7332307784938684,
+      "roc_auc_gap": 0.13927089686494154,
+      "overfit_flag": true
+    },
+    {
+      "model": "Logistic Regression",
+      "accuracy": 0.566525,
+      "precision": 0.5553089906529487,
+      "recall": 0.43499789296249475,
+      "f1": 0.4878452222714518,
+      "roc_auc": 0.5898356334290524,
+      "train_roc_auc": 0.5891399011379502,
+      "roc_auc_gap": -0.0006957322911022024,
+      "overfit_flag": false
+    },
+    {
+      "model": "XGBoost",
+      "accuracy": 0.566925,
+      "precision": 0.553549551873106,
+      "recall": 0.4522229245680573,
+      "f1": 0.49778215869886644,
+      "roc_auc": 0.5892302285971269,
+      "train_roc_auc": 0.6942538364218983,
+      "roc_auc_gap": 0.10502360782477138,
+      "overfit_flag": true
+    },
+    {
+      "model": "Decision Tree",
+      "accuracy": 0.518425,
+      "precision": 0.492673704112179,
+      "recall": 0.4941529709228824,
+      "f1": 0.49341222879684415,
+      "roc_auc": 0.5172515901435881,
+      "train_roc_auc": 1.0,
+      "roc_auc_gap": 0.4827484098564119,
+      "overfit_flag": true
+    }
+  ],
+  "rf_signal_in_top10": {
+    "bin__used_coupon": true,
+    "cat__product_category_clothing": false,
+    "cat__shipping_method_express": false,
+    "cat__payment_method_apple_pay": false,
+    "cat__device_type_desktop": false
+  },
+  "xgb_signal_in_top10": {
+    "bin__used_coupon": true,
+    "cat__product_category_clothing": true,
+    "cat__shipping_method_express": true,
+    "cat__payment_method_apple_pay": true,
+    "cat__device_type_desktop": true
+  },
+  "overfit_threshold": 0.05
+}

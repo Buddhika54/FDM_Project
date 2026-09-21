@@ -1,0 +1,20 @@
+{
+  "Logistic Regression": {
+    "C": 10,
+    "penalty": "l1"
+  },
+  "Decision Tree": {
+    "max_depth": 8,
+    "min_samples_leaf": 5
+  },
+  "Random Forest": {
+    "max_depth": 10,
+    "min_samples_leaf": 5,
+    "n_estimators": 200
+  },
+  "XGBoost": {
+    "learning_rate": 0.2,
+    "max_depth": 3,
+    "n_estimators": 100
+  }
+}

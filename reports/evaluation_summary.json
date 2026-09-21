@@ -1,0 +1,146 @@
+{
+  "best_model_by_test_roc_auc": "Random Forest",
+  "test_roc_auc": {
+    "Logistic Regression": 0.5898356334290524,
+    "Decision Tree": 0.5172515901435881,
+    "Random Forest": 0.5939598816289269,
+    "XGBoost": 0.5892302285971269
+  },
+  "average_precision": {
+    "Logistic Regression": 0.5566948669551551,
+    "Decision Tree": 0.4835311745826143,
+    "Random Forest": 0.560149475140044,
+    "XGBoost": 0.5570738635198184
+  },
+  "calibration": {
+    "Logistic Regression": {
+      "brier": 0.2430905974160647,
+      "ece_quantile_bins": 0.007253958376991987,
+      "flag": "well_calibrated",
+      "overconfident": false
+    },
+    "Decision Tree": {
+      "brier": 0.481574036851,
+      "ece_quantile_bins": 0.48275227628959905,
+      "flag": "overconfident",
+      "overconfident": true
+    },
+    "Random Forest": {
+      "brier": 0.24263928985656372,
+      "ece_quantile_bins": 0.012530549255581124,
+      "flag": "well_calibrated",
+      "overconfident": false
+    },
+    "XGBoost": {
+      "brier": 0.24346643686294556,
+      "ece_quantile_bins": 0.01350381102096287,
+      "flag": "well_calibrated",
+      "overconfident": false
+    }
+  },
+  "threshold_analysis": [
+    {
+      "threshold": 0.3,
+      "precision": 0.47583885875025117,
+      "recall": 0.9979983143699958,
+      "f1": 0.644421768707483,
+      "predicted_positive_rate": 0.9954
+    },
+    {
+      "threshold": 0.4,
+      "precision": 0.4950544015825915,
+      "recall": 0.8963864306784661,
+      "f1": 0.6378424978447468,
+      "predicted_positive_rate": 0.85935
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.5652958152958153,
+      "recall": 0.41271597134428994,
+      "f1": 0.4771038850322738,
+      "predicted_positive_rate": 0.3465
+    },
+    {
+      "threshold": 0.6,
+      "precision": 0.6482084690553745,
+      "recall": 0.06289506953223767,
+      "f1": 0.1146643618553731,
+      "predicted_positive_rate": 0.04605
+    },
+    {
+      "threshold": 0.7,
+      "precision": 0.7843137254901961,
+      "recall": 0.002107037505267594,
+      "f1": 0.0042027843446283165,
+      "predicted_positive_rate": 0.001275
+    }
+  ],
+  "threshold_recommendation": {
+    "recommended_threshold": 0.4,
+    "precision": 0.4950544015825915,
+    "recall": 0.8963864306784661,
+    "f1": 0.6378424978447468,
+    "predicted_positive_rate": 0.85935,
+    "rule": "recall-first among thresholds that flag <=90% of orders and keep precision >= 0.47 (near prevalence); 0.5 is not the default",
+    "business_framing": "Recall is more valuable than precision: the system should catch orders that will be returned so operations can intervene before fulfillment. False alarms cost review effort; missed returns cost reverse logistics. Threshold 0.3 flags almost every order so it is not useful. 0.4 roughly doubles recall vs 0.5 while precision stays near the base rate."
+  },
+  "error_patterns_at_0.5": {
+    "n_false_positives": 6025,
+    "n_false_negatives": 11149,
+    "fn_vs_all_positives_category": {
+      "false_negatives": {
+        "electronics": 0.2173,
+        "toys": 0.2089,
+        "home": 0.1841,
+        "beauty": 0.168,
+        "sports": 0.1336,
+        "clothing": 0.0881
+      },
+      "all_returns": {
+        "toys": 0.2528,
+        "beauty": 0.1927,
+        "electronics": 0.1568,
+        "home": 0.1492,
+        "clothing": 0.1363,
+        "sports": 0.1121
+      }
+    },
+    "fn_vs_all_positives_shipping": {
+      "false_negatives": {
+        "standard": 0.7401,
+        "express": 0.1589,
+        "same_day": 0.101
+      },
+      "all_returns": {
+        "standard": 0.6279,
+        "express": 0.3016,
+        "same_day": 0.0705
+      }
+    },
+    "fn_mean_product_price": 34.56839854838981,
+    "all_returns_mean_product_price": 39.80325606661711,
+    "fp_vs_all_negatives_category": {
+      "false_positives": {
+        "toys": 0.3099,
+        "beauty": 0.2276,
+        "clothing": 0.1884,
+        "home": 0.1144,
+        "sports": 0.0835,
+        "electronics": 0.0763
+      },
+      "all_non_returns": {
+        "toys": 0.2324,
+        "electronics": 0.1972,
+        "beauty": 0.1755,
+        "home": 0.1683,
+        "sports": 0.1171,
+        "clothing": 0.1094
+      }
+    },
+    "fp_coupon_rate": 0.7531950207468879,
+    "non_return_coupon_rate": 0.5912162162162162,
+    "fn_coupon_rate": 0.5447125302717732,
+    "return_coupon_rate": 0.6408554572271387
+  },
+  "note": "Phase 5 only. No hyperparameter tuning (Phase 6) and no final_model.pkl (Phase 7)."
+}

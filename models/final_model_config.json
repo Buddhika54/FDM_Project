@@ -1,0 +1,22 @@
+{
+  "model": "XGBoost",
+  "source_pickle": "tuned_xgboost.pkl",
+  "preprocessor": "preprocessor.pkl",
+  "pairing": "Load preprocessor.pkl then final_model.pkl; do not refit either.",
+  "threshold": 0.4,
+  "test_roc_auc": 0.5963095440116583,
+  "train_roc_auc": 0.6092715459549152,
+  "roc_auc_gap": 0.0129620019432569,
+  "cv_roc_auc": 0.5951950937731881,
+  "best_params": {
+    "learning_rate": 0.2,
+    "max_depth": 3,
+    "n_estimators": 100
+  },
+  "test_recall_at_threshold": 0.8579856721449641,
+  "test_precision_at_threshold": 0.5020033286075325,
+  "test_f1_at_threshold": 0.633404627649232,
+  "test_percent_flagged_at_threshold": 0.81115,
+  "threshold_rule": "recall-first among thresholds that flag <=90% of orders and keep precision >= 0.47 (near prevalence); 0.5 is not the default",
+  "default_predict_label": "returned if predict_proba[:, 1] >= threshold"
+}

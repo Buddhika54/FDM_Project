@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global tokens / base typography — extend during UI implementation */
+body {
+  @apply min-h-screen bg-slate-50 text-slate-900 antialiased;
+}
