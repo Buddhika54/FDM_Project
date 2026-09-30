@@ -75,6 +75,8 @@ class FeatureBuilder(BaseEstimator, TransformerMixin):
         q_low, q_high = self.price_quantiles
         self.price_q33_ = float(frame["product_price"].quantile(q_low))
         self.price_q66_ = float(frame["product_price"].quantile(q_high))
+        if self.price_q66_ <= self.price_q33_:
+            self.price_q66_ = self.price_q33_ + 1e-9
 
         self.n_features_in_ = frame.shape[1]
         self.feature_names_in_ = np.asarray(frame.columns.tolist(), dtype=object)

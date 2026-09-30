@@ -29,6 +29,9 @@ class Config:
     MODEL_DIR = PROJECT_ROOT / "models"
     FINAL_MODEL_PATH = MODEL_DIR / os.getenv("FINAL_MODEL_FILENAME", "final_model.pkl")
     PREPROCESSOR_PATH = MODEL_DIR / os.getenv("PREPROCESSOR_FILENAME", "preprocessor.pkl")
+    INFERENCE_PIPELINE_PATH = MODEL_DIR / os.getenv(
+        "INFERENCE_PIPELINE_FILENAME", "inference_pipeline.pkl"
+    )
     FINAL_MODEL_CONFIG_PATH = MODEL_DIR / os.getenv(
         "FINAL_MODEL_CONFIG_FILENAME", "final_model_config.json"
     )

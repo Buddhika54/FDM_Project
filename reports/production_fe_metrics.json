@@ -1,0 +1,55 @@
+{
+  "metrics": {
+    "n_model_features": 56,
+    "test_roc_auc": 0.5964456652916783,
+    "train_roc_auc": 0.6102687323192669,
+    "test_accuracy_at_0.5": 0.57165,
+    "test_precision_at_0.5": 0.5618563595024743,
+    "test_recall_at_0.5": 0.44258322798145805,
+    "test_f1_at_0.5": 0.49513819317579116,
+    "test_accuracy_at_threshold": 0.526725,
+    "test_precision_at_threshold": 0.5008133574782849,
+    "test_recall_at_threshold": 0.8595132743362832,
+    "test_f1_at_threshold": 0.632871133520799,
+    "test_percent_flagged_at_threshold": 0.814525,
+    "threshold": 0.4,
+    "roc_auc_gap": 0.01382306702758862
+  },
+  "threshold_table": [
+    {
+      "threshold": 0.3,
+      "precision": 0.47755629945222156,
+      "recall": 0.9919405815423514,
+      "f1": 0.6447206244864421,
+      "predicted_positive_rate": 0.9858
+    },
+    {
+      "threshold": 0.4,
+      "precision": 0.5008133574782849,
+      "recall": 0.8595132743362832,
+      "f1": 0.632871133520799,
+      "predicted_positive_rate": 0.814525
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.5618563595024743,
+      "recall": 0.44258322798145805,
+      "f1": 0.49513819317579116,
+      "predicted_positive_rate": 0.37385
+    },
+    {
+      "threshold": 0.6,
+      "precision": 0.6434962147281487,
+      "recall": 0.09850400337126,
+      "f1": 0.1708542713567839,
+      "predicted_positive_rate": 0.07265
+    },
+    {
+      "threshold": 0.7,
+      "precision": 0.7191489361702128,
+      "recall": 0.008902233459755583,
+      "f1": 0.0175867630990166,
+      "predicted_positive_rate": 0.005875
+    }
+  ]
+}

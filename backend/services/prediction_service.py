@@ -1,5 +1,6 @@
 """
-Inference use-case. Only module that calls sklearn/xgboost pickles.
+Inference use-case. Only module that calls the production sklearn pipeline.
+Engineered features are created inside the pickle (FeatureBuilder), not here.
 """
 
 from __future__ import annotations
@@ -7,7 +8,7 @@ from __future__ import annotations
 import pandas as pd
 
 from models.prediction_schema import FEATURE_COLUMN_ORDER
-from services.model_loader import get_model, get_model_config, get_preprocessor
+from services.model_loader import get_inference_pipeline, get_model_config
 
 
 def probability_to_risk_level(probability: float) -> str:
@@ -31,23 +32,22 @@ def recommendation_for(flagged: bool, risk_level: str) -> str:
 
 def predict_return_risk(features: dict) -> dict:
     frame = pd.DataFrame([features], columns=FEATURE_COLUMN_ORDER)
-    preprocessor = get_preprocessor()
-    model = get_model()
+    pipeline = get_inference_pipeline()
     meta = get_model_config()
     threshold = float(meta["threshold"])
 
-    transformed = preprocessor.transform(frame)
-    probability = float(model.predict_proba(transformed)[0, 1])
+    probability = float(pipeline.predict_proba(frame)[0, 1])
     flagged = bool(probability >= threshold)
     prediction = 1 if flagged else 0
     risk_level = probability_to_risk_level(probability)
     params = meta.get("best_params") or {}
+    fe_tag = "fe" if meta.get("includes_feature_engineering") else "raw"
     version = (
-        f"tuned-n_estimators={params.get('n_estimators')}"
+        f"{fe_tag}-n_estimators={params.get('n_estimators')}"
         f"-max_depth={params.get('max_depth')}"
         f"-lr={params.get('learning_rate')}"
         if params
-        else "phase7"
+        else fe_tag
     )
     return {
         "return_risk_probability": probability,

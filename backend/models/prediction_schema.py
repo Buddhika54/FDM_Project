@@ -67,3 +67,16 @@ CATEGORICAL_VALUES = {
 }
 
 FEATURE_COLUMN_ORDER = list(REQUIRED_FEATURES)
+
+# Generated inside the production pipeline. Never accepted on POST /api/predict.
+ENGINEERED_NUMERIC_FEATURES = [
+    "discount_amount",
+    "customer_risk_score",
+    "engagement_score",
+]
+ENGINEERED_CATEGORICAL_FEATURES = [
+    "price_category",
+    "coupon_category_interaction",
+    "shipping_payment_interaction",
+]
+ENGINEERED_FEATURES = ENGINEERED_NUMERIC_FEATURES + ENGINEERED_CATEGORICAL_FEATURES

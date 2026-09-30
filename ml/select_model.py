@@ -107,8 +107,12 @@ def smoke_test_raw_rows(n: int = 3) -> dict:
     proba = model.predict_proba(transformed)[:, 1]
     if transformed.shape[0] != n:
         raise RuntimeError("Preprocessor dropped rows")
-    if transformed.shape[1] != 26:
-        raise RuntimeError(f"Expected 26 model features, got {transformed.shape[1]}")
+    n_features = int(transformed.shape[1])
+    expected = None
+    if CONFIG_PATH.exists():
+        expected = json.loads(CONFIG_PATH.read_text(encoding="utf-8")).get("n_model_features")
+    if expected is not None and n_features != int(expected):
+        raise RuntimeError(f"Expected {expected} model features, got {n_features}")
     return {
         "n_rows": n,
         "transformed_shape": list(transformed.shape),
@@ -118,6 +122,13 @@ def smoke_test_raw_rows(n: int = 3) -> dict:
 
 
 def run_selection() -> dict:
+    if CONFIG_PATH.exists():
+        existing = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+        if existing.get("includes_feature_engineering"):
+            raise RuntimeError(
+                "Production artifacts include FeatureBuilder. "
+                "Re-run `python -m ml.train_production` instead of Phase 7 select_model."
+            )
     comparison = load_tuned_comparison()
     params = json.loads(PARAMS_OUT.read_text(encoding="utf-8"))
     xgb_row = comparison.set_index("model").loc[SELECTED_NAME]

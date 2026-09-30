@@ -18,4 +18,5 @@ TEST_SIZE = 0.2
 
 FINAL_MODEL_PATH = MODELS_DIR / "final_model.pkl"
 PREPROCESSOR_PATH = MODELS_DIR / "preprocessor.pkl"
+INFERENCE_PIPELINE_PATH = MODELS_DIR / "inference_pipeline.pkl"
 FINAL_MODEL_CONFIG_PATH = MODELS_DIR / "final_model_config.json"

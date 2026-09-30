@@ -142,7 +142,7 @@ def _require_columns(df: pd.DataFrame) -> None:
 
 
 def build_preprocessor() -> Pipeline:
-    """Unfitted Pipeline: FeatureCleaner → scale numerics / one-hot cats / passthrough binary."""
+    """Unfitted Phase-2 Pipeline: FeatureCleaner → scale / one-hot (14 raw fields only)."""
     ohe = OneHotEncoder(
         categories=[CATEGORICAL_VALUES[c] for c in CATEGORICAL_FEATURES],
         handle_unknown="error",
@@ -160,6 +160,55 @@ def build_preprocessor() -> Pipeline:
     return Pipeline(
         [
             ("clean", FeatureCleaner(price_quantile=PRICE_CAP_QUANTILE)),
+            ("encode_scale", column_transform),
+        ]
+    )
+
+
+def build_production_preprocessor() -> Pipeline:
+    """
+    Production transform: FeatureCleaner → FeatureBuilder → scale / one-hot.
+
+    Flask still receives the original 14 raw fields. Engineered columns are
+    created inside this pipeline after train-only clips and the price cap.
+    """
+    from ml.feature_engineering.feature_builder import (
+        COUPON_CATEGORY_CATEGORIES,
+        ENGINEERED_CATEGORICAL_FEATURES,
+        ENGINEERED_NUMERIC_FEATURES,
+        PRICE_CATEGORY_LABELS,
+        SHIPPING_PAYMENT_CATEGORIES,
+        FeatureBuilder,
+    )
+
+    numeric = NUMERIC_FEATURES + ENGINEERED_NUMERIC_FEATURES
+    categorical = CATEGORICAL_FEATURES + ENGINEERED_CATEGORICAL_FEATURES
+    ohe = OneHotEncoder(
+        categories=[
+            CATEGORICAL_VALUES["device_type"],
+            CATEGORICAL_VALUES["product_category"],
+            CATEGORICAL_VALUES["shipping_method"],
+            CATEGORICAL_VALUES["payment_method"],
+            list(PRICE_CATEGORY_LABELS),
+            list(COUPON_CATEGORY_CATEGORIES),
+            list(SHIPPING_PAYMENT_CATEGORIES),
+        ],
+        handle_unknown="error",
+        sparse_output=False,
+    )
+    column_transform = ColumnTransformer(
+        transformers=[
+            ("num", StandardScaler(), numeric),
+            ("cat", ohe, categorical),
+            ("bin", "passthrough", BINARY_FEATURES),
+        ],
+        remainder="drop",
+        verbose_feature_names_out=True,
+    )
+    return Pipeline(
+        [
+            ("clean", FeatureCleaner(price_quantile=PRICE_CAP_QUANTILE)),
+            ("engineer", FeatureBuilder()),
             ("encode_scale", column_transform),
         ]
     )

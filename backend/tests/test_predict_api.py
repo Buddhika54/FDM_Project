@@ -114,6 +114,15 @@ def main() -> int:
         print("FAIL bad rating")
         failed += 1
 
+    leaked = dict(valid)
+    leaked["discount_amount"] = 10.0
+    leak_resp = client.post("/api/predict", json=leaked)
+    leak_body = leak_resp.get_json()
+    print("POST /api/predict engineered field", leak_resp.status_code, leak_body)
+    if leak_resp.status_code != 400 or "discount_amount" not in (leak_body.get("details") or {}):
+        print("FAIL engineered field must be rejected")
+        failed += 1
+
     if failed:
         print(f"{failed} check(s) failed")
         return 1

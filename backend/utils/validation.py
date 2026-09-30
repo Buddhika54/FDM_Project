@@ -13,6 +13,7 @@ from models.prediction_schema import (
     BINARY_FEATURES,
     CATEGORICAL_FEATURES,
     CATEGORICAL_VALUES,
+    ENGINEERED_FEATURES,
     REQUIRED_FEATURES,
 )
 from utils.exceptions import ValidationError
@@ -83,7 +84,10 @@ def validate_prediction_payload(payload: dict) -> dict:
 
     extra = set(payload.keys()) - set(REQUIRED_FEATURES) - FORBIDDEN_FIELDS
     for name in sorted(extra):
-        details[name] = "unknown field"
+        if name in ENGINEERED_FEATURES:
+            details[name] = "generated internally from raw fields; do not send"
+        else:
+            details[name] = "unknown field"
 
     for field in REQUIRED_FEATURES:
         if field not in payload:
