@@ -27,7 +27,7 @@
     },
     "Random Forest": {
       "brier": 0.24263928985656372,
-      "ece_quantile_bins": 0.012530549255581124,
+      "ece_quantile_bins": 0.012530549255581147,
       "flag": "well_calibrated",
       "overconfident": false
     },

@@ -16,6 +16,10 @@
     ],
     "roc_auc": 0.5898356334290524,
     "model": "Logistic Regression",
+    "train_roc_auc": 0.5891399011379502,
+    "test_roc_auc": 0.5898356334290524,
+    "roc_auc_gap": -0.0006957322911022024,
+    "overfit_flag": false,
     "n_iter": 11
   },
   "decision_tree": {
@@ -35,6 +39,10 @@
     ],
     "roc_auc": 0.5172515901435881,
     "model": "Decision Tree",
+    "train_roc_auc": 1.0,
+    "test_roc_auc": 0.5172515901435881,
+    "roc_auc_gap": 0.4827484098564119,
+    "overfit_flag": true,
     "tree_depth": 56,
     "node_count": 74119,
     "n_leaves": 37060
@@ -46,7 +54,10 @@
       "precision": 0.5553089906529487,
       "recall": 0.43499789296249475,
       "f1": 0.4878452222714518,
-      "roc_auc": 0.5898356334290524
+      "roc_auc": 0.5898356334290524,
+      "train_roc_auc": 0.5891399011379502,
+      "roc_auc_gap": -0.0006957322911022024,
+      "overfit_flag": false
     },
     {
       "model": "Decision Tree",
@@ -54,7 +65,10 @@
       "precision": 0.492673704112179,
       "recall": 0.4941529709228824,
       "f1": 0.49341222879684415,
-      "roc_auc": 0.5172515901435881
+      "roc_auc": 0.5172515901435881,
+      "train_roc_auc": 1.0,
+      "roc_auc_gap": 0.4827484098564119,
+      "overfit_flag": true
     }
   ]
 }
